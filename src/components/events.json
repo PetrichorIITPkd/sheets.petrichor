@@ -1,0 +1,180 @@
+{
+    "data": [
+        "name",
+        "email",
+        "phone",
+        "CA"
+    ],
+    "events": [
+        {
+            "name": "Dummy",
+            "participants": [
+                {
+                    "team": "Team1",
+                    "details": [
+                        {
+                            "name": "hey",
+                            "email": "aj@gmail",
+                            "phone": "12345",
+                            "CA": ""
+                        },
+                        {
+                            "name": "hey",
+                            "email": "aj@gmail",
+                            "phone": "12345",
+                            "CA": ""
+                        },
+                        {
+                            "name": "hey",
+                            "email": "aj@gmail",
+                            "phone": "12345",
+                            "CA": ""
+                        },
+                        {
+                            "name": "hey",
+                            "email": "aj@gmail",
+                            "phone": "12345",
+                            "CA": ""
+                        }
+                    ]
+                },
+                {
+                    "team": "Team2",
+                    "details": [
+                        {
+                            "name": "hey",
+                            "email": "aj@gmail",
+                            "phone": "12345",
+                            "CA": ""
+                        },
+                        {
+                            "name": "hey",
+                            "email": "aj@gmail",
+                            "phone": "12345",
+                            "CA": ""
+                        },
+                        {
+                            "name": "hey",
+                            "email": "aj@gmail",
+                            "phone": "12345",
+                            "CA": ""
+                        }
+                    ]
+                },
+                {
+                    "team": "Team3",
+                    "details": [
+                        {
+                            "name": "hey",
+                            "email": "aj@gmail",
+                            "phone": "12345",
+                            "CA": ""
+                        },
+                        {
+                            "name": "hey",
+                            "email": "aj@gmail",
+                            "phone": "12345",
+                            "CA": ""
+                        }
+                    ]
+                },
+                {
+                    "team": "Team4",
+                    "details": [
+                        {
+                            "name": "hey",
+                            "email": "aj@gmail",
+                            "phone": "12345",
+                            "CA": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Dummy1",
+            "participants": [
+                {
+                    "team": "Team1",
+                    "details": [
+                        {
+                            "name": "haha",
+                            "email": "ha@smail",
+                            "phone": "975262",
+                            "CA": ""
+                        },
+                        {
+                            "name": "haha",
+                            "email": "ha@smail",
+                            "phone": "975262",
+                            "CA": ""
+                        },
+                        {
+                            "name": "haha",
+                            "email": "ha@smail",
+                            "phone": "975262",
+                            "CA": ""
+                        },
+                        {
+                            "name": "haha",
+                            "email": "ha@smail",
+                            "phone": "975262",
+                            "CA": ""
+                        }
+                    ]
+                },
+                {
+                    "team": "Team2",
+                    "details": [
+                        {
+                            "name": "haha",
+                            "email": "ha@smail",
+                            "phone": "975262",
+                            "CA": ""
+                        },
+                        {
+                            "name": "haha",
+                            "email": "ha@smail",
+                            "phone": "975262",
+                            "CA": ""
+                        },
+                        {
+                            "name": "haha",
+                            "email": "ha@smail",
+                            "phone": "975262",
+                            "CA": ""
+                        }
+                    ]
+                },
+                {
+                    "team": "Team3",
+                    "details": [
+                        {
+                            "name": "haha",
+                            "email": "ha@smail",
+                            "phone": "975262",
+                            "CA": ""
+                        },
+                        {
+                            "name": "haha",
+                            "email": "ha@smail",
+                            "phone": "975262",
+                            "CA": ""
+                        }
+                    ]
+                },
+                {
+                    "team": "Team4",
+                    "details": [
+                        {
+                            "name": "haha",
+                            "email": "ha@smail",
+                            "phone": "975262",
+                            "CA": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
