@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import json from './events.json'
+import Loading from "./Loading";
 
 
 const Nav = () => {
@@ -7,12 +8,15 @@ const Nav = () => {
     const [column, setColumn] = useState([])
     const [events, setEvents] = useState([])
     const [eventIndex, setEventIndex] = useState(0)
+    let loading = false
 
 
     useEffect(() => {
+        loading = true
         fetch('https://pcap-back-production.up.railway.app/api/events/')
             .then(res => res.json())
             .then(data1 => {
+                loading = false
                 if (data1.response == 200) {
                     setColumn(data1.data)
                     setEvents(data1.events)
@@ -38,6 +42,7 @@ const Nav = () => {
 
     return (
         <>
+        <Loading spinning = {loading}></Loading>
             <select style={{ marginTop: '2rem', marginLeft: '4.5rem', marginBottom: '1rem' }} id="selected" onChange={(e) => handleChange(e)}>
                 {events?.map(event => (
                     <option keys={event.id}>{event.name}</option>
