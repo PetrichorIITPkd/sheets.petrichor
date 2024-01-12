@@ -5,30 +5,41 @@ import Loading from "./Loading";
 
 const Nav = () => {
 
-    const [column, setColumn] = useState([])
+    const [column, setColumn] = useState(["name",
+    "email",
+    "phone",
+    "CA"])
+    const [event, setEvent] = useState({})
     const [events, setEvents] = useState([])
+    // let events = []
     const [eventIndex, setEventIndex] = useState(0)
-    let loading = false
 
+    const arr = ['CP00','CF01','CP02','CP03','CF04','CF05','CP06','CP07','CF08','CP09','CP10','CF11','CF12','CF13','CP14','CF15','CF16','CP17','CF18','CF19','TF00','TF01','TF02','TF03','TF04','TF05','TF06','TF07','TF08','TF09','TF10','TF11','TF12','TF13','TF14','WP00','WP01','WP02','WP03','WP04','WP05','WP06']
 
-    useEffect(() => {
-        loading = true
-        fetch('https://pcap-back-production.up.railway.app/api/events/')
-            .then(res => res.json())
-            .then(data1 => {
-                loading = false
-                if (data1.response == 200) {
-                    setColumn(data1.data)
-                    setEvents(data1.events)
+    useEffect( () => {
+        const func = async () => {
+            for(let idx in arr){
+                await fetch('https://pcap-back-production.up.railway.app/internal/sheets/view/',{
+                        method : 'POST',
+                        body : JSON.stringify({
+                            id : arr[idx]
+                        }),
+                        headers: {
+                            'Content-type': 'application/json; charset=UTF-8'
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data1 => {
+                        setEvent(data1)
+                    })
                 }
-                else {
-                    setColumn(json.data)
-                    setEvents(json.events)
-                }
-            })
-    }, [])
+        }
+        func()
+    },[])
 
-
+    useEffect( () => {
+        setEvents([...events,event])
+    },[event])
 
     let selected = ""
     const handleChange = event => {
@@ -42,9 +53,9 @@ const Nav = () => {
 
     return (
         <>
-        <Loading spinning = {loading}></Loading>
             <select style={{ marginTop: '2rem', marginLeft: '4.5rem', marginBottom: '1rem' }} id="selected" onChange={(e) => handleChange(e)}>
                 {events?.map(event => (
+                    // console.log(events,'e')
                     <option keys={event.id}>{event.name}</option>
                 ))}
             </select>
