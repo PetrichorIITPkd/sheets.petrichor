@@ -6,57 +6,81 @@ import Loading from "./Loading";
 const Nav = () => {
 
     const [column, setColumn] = useState(["name",
-    "email",
-    "phone",
-    "CA"])
-    const [event, setEvent] = useState({})
+        "email",
+        "phone",
+        "CA"])
     const [events, setEvents] = useState([])
-    // let events = []
+    let list = []
     const [eventIndex, setEventIndex] = useState(0)
 
-    const arr = ['CP00','CF01','CP02','CP03','CF04','CF05','CP06','CP07','CF08','CP09','CP10','CF11','CF12','CF13','CP14','CF15','CF16','CP17','CF18','CF19','TF00','TF01','TF02','TF03','TF04','TF05','TF06','TF07','TF08','TF09','TF10','TF11','TF12','TF13','TF14','WP00','WP01','WP02','WP03','WP04','WP05','WP06']
+    const arr = { 'CP00': 'F3: Fireless Food Fiesta', 'CF01': "BRUSHED BRILLIANCE", 'CP02': "Meta Monologues", 'CP03': "Voicestra", 'CF04': "Fashion Frenzy ", 'CF05': "Waste to wow", 'CP06': "Dynamic Duet", 'CP07': "ChoreoClash", 'CF08': "BGMI Showdown", 'CP09': "KATHA - where words become world", 'CP10': "CODM: Clash of Champions", 'CF11': "KAVYA - weaving verses, crafting dreams", 'CF12': "DROP THE BEAT", 'CF13': "Pixel Palette", 'CP14': "Groove Mania", 'CF15': "Click n' Roll: A Showcase of Frames", 'CF16': "Enigma - The General Quiz", 'CP17': "Bandwagon", 'CF18': "Sportify - The SpEnt Quiz", 'CF19': "Valorant", 'TF00': "Treasure Hunt", 'TF01': "Simulate To The Moon", 'TF02': "Clench Bot", 'TF03': "AlgoTrek", 'TF04': "Drone Dash", 'TF05': "Game Forge", 'TF06': "Kampan ", 'TF07': "Trade-a-thon 2.0", 'TF08': "WebMosiac", 'TF09': "Labyrinth 2.0", 'TF10': "Eggstravaganza Drop Challenge", 'TF11': "Hover hero challenge", 'TF12': "Quizzanaire - School Quiz", 'TF13': "Robowar", 'TF14': "ChipCraft", 'WP00': "AI Workshop", 'WP01': "Robotics", 'WP02': "Product Management", 'WP03': "Reinforcement Learning", 'WP04': "Startup and Entrepreneurship", 'WP05': "Measurement Principles and Uncertainty Analysis", 'WP06': "Competitive Programming" }
 
-    useEffect( () => {
-        const func = async () => {
-            for(let idx in arr){
-                await fetch('https://pcap-back-production.up.railway.app/internal/sheets/view/',{
-                        method : 'POST',
-                        body : JSON.stringify({
-                            id : arr[idx]
-                        }),
-                        headers: {
-                            'Content-type': 'application/json; charset=UTF-8'
-                        }
-                    })
-                    .then(res => res.json())
-                    .then(data1 => {
-                        setEvent(data1)
-                    })
-                }
-        }
-        func()
-    },[])
 
-    useEffect( () => {
-        setEvents([...events,event])
-    },[event])
+    for (const key in arr) {
+        list.push(arr[key])
+    }
 
-    let selected = ""
-    const handleChange = event => {
-        selected = event?.target.value;
+    const [selected, setSel] = useState(list[0])
+
+    function getKeyByValue(object, value) {
+        return Object.keys(object).find(key =>
+            object[key] === value);
+    }
+
+    const fetchData = async () => {
+        await fetch('https://petrichor-backend.vercel.app/internal/sheets/view/', {
+            method: 'POST',
+            body: JSON.stringify({
+                id: getKeyByValue(arr, selected)
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        })
+            .then(res => res.json())
+            .then(data1 => {
+                setEvents(([...events]) => [...events, data1])
+            })
+    }
+
+
+    const handleChange = e => {
+        setSel(sel => sel = e?.target.value)
+    };
+
+    useEffect(() => {
         setEventIndex(events.findIndex(object => {
             return object.name === selected;
         }
-        ));
+        ))
+    }, [events])
 
-    };
+
+    useEffect(() => {
+        let isfetched = false
+        for (let idx in events) {
+            if (events[idx].name == selected) {
+                isfetched = true
+                break;
+            }
+        }
+        if (!isfetched) {
+            fetchData()
+        }
+        else {
+            setEventIndex(events.findIndex(object => {
+                return object.name === selected;
+            }
+            ))
+        }
+    }, [selected])
+
 
     return (
         <>
             <select style={{ marginTop: '2rem', marginLeft: '4.5rem', marginBottom: '1rem' }} id="selected" onChange={(e) => handleChange(e)}>
-                {events?.map(event => (
-                    // console.log(events,'e')
-                    <option keys={event.id}>{event.name}</option>
+                {list?.map(event => (
+                    <option>{event}</option>
                 ))}
             </select>
             <div className='container'>
