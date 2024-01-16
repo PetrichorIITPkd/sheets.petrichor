@@ -8,7 +8,8 @@ const Nav = () => {
     const [column, setColumn] = useState(["name",
         "email",
         "phone",
-        "CA"])
+        "CA",
+        "verified"])
     const [events, setEvents] = useState([])
     let list = []
     const [eventIndex, setEventIndex] = useState(0)
